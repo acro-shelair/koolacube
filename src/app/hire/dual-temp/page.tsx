@@ -25,12 +25,12 @@ const data: HireData = {
   optionsTitle: "Chilled and frozen, one footprint",
   options: [
     {
-      title: "Short-term hire",
-      desc: "Dual chilled + frozen storage for events, pop-ups and functions.",
-    },
-    {
       title: "Long-term hire",
       desc: "Ongoing flexible storage for hospitality, retail and healthcare kitchens.",
+    },
+    {
+      title: "Monthly commercial hire",
+      desc: "Simple monthly billing for ongoing chilled + frozen storage on site.",
     },
     {
       title: "Seasonal hire",
@@ -48,7 +48,7 @@ const data: HireData = {
     { title: "Mobile Dual Temp Rooms", desc: "Chiller + freezer in one portable unit." },
     { title: "Modular Dual Temp Rooms", desc: "Larger split-zone storage built onsite." },
     { title: "Emergency Dual Temp Hire", desc: "Cover chilled and frozen stock fast." },
-    { title: "Event Dual Storage", desc: "Beverages chilled, stock frozen — one footprint." },
+    { title: "Retail Dual Storage", desc: "Beverages chilled, stock frozen — one footprint." },
     { title: "Long Term Dual Temp Hire", desc: "Flexible ongoing chilled + frozen capacity." },
   ],
   advantagesIntro:
@@ -72,7 +72,7 @@ const data: HireData = {
   sizes: [
     { size: "4m Unit", desc: "Compact chilled + frozen for cafes and small kitchens." },
     { size: "6m Unit", desc: "Catering, restaurants, aged-care and retail." },
-    { size: "9m Unit", desc: "Large events, supermarkets, industrial and remote camps." },
+    { size: "9m Unit", desc: "Supermarkets, food manufacturing, industrial and remote camps." },
   ],
   sizesNote: "Custom layouts and zone splits available on request.",
   useCasesTitle: "Use Cases",

@@ -9,11 +9,11 @@ import {
 export const metadata: Metadata = {
   title: "Freezer Room Hire | Koolacube",
   description:
-    "Mobile and modular freezer room hire down to -25°C for meat, seafood, frozen goods and long-term preservation. Short-term, long-term and seasonal hire with fast on-site delivery.",
+    "Mobile and modular freezer room hire down to -25°C for meat, seafood, frozen goods and long-term preservation. Long-term and seasonal commercial hire with fast on-site delivery.",
   openGraph: {
     title: "Freezer Room Hire | Koolacube",
     description:
-      "Deep-freeze room hire for commercial, industrial and event use. Fast delivery, easy setup and 24/7 support.",
+      "Deep-freeze room hire for commercial and industrial use. Fast delivery, easy setup and 24/7 support.",
   },
 };
 
@@ -21,16 +21,16 @@ const data: HireData = {
   crumb: "Hire / Freezer Room",
   title: "Freezer Room Hire Options",
   intro:
-    "We provide mobile and modular freezer room hire Australia-wide for deep-frozen storage down to -25°C. Reliable low-temperature units for meat, seafood, frozen goods and long-term preservation across commercial, industrial and event use.",
+    "We provide mobile and modular freezer room hire Australia-wide for deep-frozen storage down to -25°C. Reliable low-temperature units for meat, seafood, frozen goods and long-term preservation across commercial and industrial use.",
   optionsTitle: "Frozen storage on your terms",
   options: [
     {
-      title: "Short-term hire",
-      desc: "Frozen storage for events, pop-ups and emergency cover.",
-    },
-    {
       title: "Long-term hire",
       desc: "Ongoing frozen capacity for hospitality, food manufacturing and industrial use.",
+    },
+    {
+      title: "Monthly commercial hire",
+      desc: "Simple monthly billing for ongoing frozen storage and emergency cover.",
     },
     {
       title: "Seasonal hire",
@@ -43,9 +43,9 @@ const data: HireData = {
   ],
   rangeTitle: "Our Freezer Room Hire Range",
   rangeIntro:
-    "Whether you need a single mobile freezer for an event or large-scale frozen capacity onsite, our freezer rooms deliver stable sub-zero temperatures, high efficiency and complete peace of mind. We provide fast delivery, easy setup and 24/7 support.",
+    "Whether you need a single mobile freezer or large-scale frozen capacity onsite, our freezer rooms deliver stable sub-zero temperatures, high efficiency and complete peace of mind. We provide fast delivery, easy setup and 24/7 support.",
   range: [
-    { title: "Mobile Freezer Rooms", desc: "Portable deep-freeze for catering and events." },
+    { title: "Mobile Freezer Rooms", desc: "Portable deep-freeze for catering and hospitality." },
     { title: "Modular Walk-In Freezer Rooms", desc: "Large-scale frozen storage, built onsite." },
     { title: "Emergency Freezer Hire", desc: "Urgent backup when a freezer fails." },
     { title: "Bulk Frozen Storage", desc: "High-volume frozen goods and stock overflow." },
@@ -70,9 +70,9 @@ const data: HireData = {
   ],
   sizesTitle: "Standard Freezer Room Sizes",
   sizes: [
-    { size: "3m Unit", desc: "Small events, backup freezing, cafes." },
+    { size: "3m Unit", desc: "Small kitchens, backup freezing, cafes." },
     { size: "6m Unit", desc: "Restaurants, butchers, caterers, wholesalers." },
-    { size: "9m Unit", desc: "Food manufacturing, bulk frozen stock, large events." },
+    { size: "9m Unit", desc: "Food manufacturing, bulk frozen stock, wholesalers." },
   ],
   sizesNote: "Custom configurations available on request.",
   useCasesTitle: "Use Cases",

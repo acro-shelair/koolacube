@@ -59,7 +59,7 @@ const data: BuyData = {
   sizesTitle: "Standard Cold Room Sizes",
   sizesIntro: "Below are common unit sizes we offer for sale:",
   sizes: [
-    { size: "3m Unit", suited: "Cafés, pop-ups, small kitchens", availability: "New & Ex-Hire" },
+    { size: "3m Unit", suited: "Cafés, retail, small kitchens", availability: "New & Ex-Hire" },
     { size: "6m Unit", suited: "Restaurants, florists, aged-care", availability: "New & Ex-Hire" },
     { size: "9m Unit", suited: "Large venues, industrial use", availability: "New & Custom-Built" },
   ],

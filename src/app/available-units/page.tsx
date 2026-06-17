@@ -39,7 +39,7 @@ const units: Unit[] = [
     id: "cooler-room",
     icon: Snowflake,
     name: "Cooler Room — Mobile Refrigerated Storage",
-    tagline: "Reliable Chilled Storage for Food, Beverage & Event Use",
+    tagline: "Reliable Chilled Storage for Food, Beverage & Commercial Use",
     intro:
       "Our Cooler Rooms are designed to maintain stable temperatures ideal for fresh produce, beverages, catering supplies and general chilled storage. Built using high-density insulation and commercial-grade refrigeration, these units deliver consistent cooling with low running costs.",
     img: "/unit-coldroom.jpg",
@@ -55,7 +55,7 @@ const units: Unit[] = [
       { feature: "Relocation", value: "Fully transportable, forklift pockets" },
     ],
     applications: [
-      "Events & festivals",
+      "Food manufacturing & processing",
       "Restaurants, cafés & catering",
       "Florists & fresh produce suppliers",
       "Aged-care & healthcare",
@@ -116,7 +116,7 @@ const units: Unit[] = [
       "Catering & hospitality",
       "Supermarkets & food retailers",
       "Aged-care & healthcare kitchens",
-      "Event operators needing dual storage",
+      "Food manufacturers needing dual storage",
       "Industrial & remote camps",
       "Businesses managing both chilled and frozen stock",
     ],

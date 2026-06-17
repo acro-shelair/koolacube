@@ -5,7 +5,6 @@ import {
   Check,
   AlertTriangle,
   ChefHat,
-  PartyPopper,
   HeartPulse,
   GraduationCap,
   HardHat,
@@ -16,11 +15,11 @@ import {
 export const metadata: Metadata = {
   title: "Industries We Serve | Koolacube",
   description:
-    "Portable cooling solutions for hospitality, events, aged care, healthcare, education, construction and mining. Reliable temperature control, easy mobility and full compliance across Australia.",
+    "Portable cooling solutions for hospitality, aged care, healthcare, education, construction and mining. Reliable temperature control, easy mobility and full compliance across Australia.",
   openGraph: {
     title: "Industries We Serve | Koolacube",
     description:
-      "Tailored portable cold room and freezer solutions for hospitality, events, aged care, education, construction and mining.",
+      "Tailored portable cold room and freezer solutions for hospitality, aged care, education, construction and mining.",
   },
 };
 
@@ -43,36 +42,16 @@ const industries: Industry[] = [
     intro:
       "In hospitality, consistent temperature control is critical. Koolacube offers reliable, food-safe refrigerated storage for kitchens of all sizes—whether you're running a café, restaurant, catering business or food truck.",
     challenges: [
-      "Limited storage during peak seasons",
-      "Need for temporary cold storage during upgrades or breakdowns",
+      "Ongoing storage capacity as the business grows",
+      "Need for reliable cold storage during upgrades or breakdowns",
       "Compliance with food safety standards",
-      "Unpredictable event or catering volume",
+      "Consistent, high-volume catering demand",
     ],
     helps: [
-      "Portable Cool Rooms & Freezer Rooms for short-term or long-term use",
-      "Fast delivery for emergencies, equipment failures or last-minute events",
+      "Portable Cool Rooms & Freezer Rooms for ongoing, long-term use",
+      "Fast delivery and maintenance-backed reliability",
       "Food-grade interiors meeting all HACCP and safety guidelines",
       "Scalable solutions: from 3m units for small kitchens to 9m units for bulk storage",
-    ],
-  },
-  {
-    id: "events",
-    icon: PartyPopper,
-    name: "Events & Festivals",
-    tagline: "Reliable Temporary Refrigeration for Events, Markets, Weddings & Festivals",
-    intro:
-      "Koolacube supports event organisers with mobile cold rooms that are durable, secure and easy to position onsite.",
-    challenges: [
-      "Large volumes of food and beverages",
-      "Outdoor conditions requiring stable temperature",
-      "Short-term, high-demand storage",
-      "Power supply limitations",
-    ],
-    helps: [
-      "Quick setup & onsite placement for any event size",
-      "Energy-efficient coolers & freezers that maintain stable temperatures outdoors",
-      "Units designed for crowd-safe, lockable storage",
-      "Options for Cool Rooms, Freezer Rooms and Dual Temp Rooms based on event needs",
     ],
   },
   {
@@ -99,20 +78,20 @@ const industries: Industry[] = [
     id: "education",
     icon: GraduationCap,
     name: "Education & Schools",
-    tagline: "Portable Refrigeration for School Events & Canteens",
+    tagline: "Portable Refrigeration for School Canteens & Catering",
     intro:
-      "Schools often need short-term or seasonal cooling solutions for events, canteen operations, food technology labs and storage overflow. Koolacube provides safe, easy-to-use and reliable cold rooms for educational facilities.",
+      "Schools need dependable cooling solutions for canteen operations, food technology labs and storage overflow. Koolacube provides safe, easy-to-use and reliable cold rooms for educational facilities on ongoing hire.",
     challenges: [
-      "Temporary storage for school events and carnivals",
+      "Additional storage for canteens and meal programs",
       "Canteen refrigeration breakdowns",
-      "Seasonal storage increases (summer programs, camps, exams)",
+      "Growing storage requirements across the school year",
       "Limited kitchen space",
     ],
     helps: [
-      "Portable cool rooms for sports days, events and fetes",
+      "Portable cool rooms for canteen and catering support",
       "Freezer rooms for canteen and meal-prep support",
       "Safe, lockable units suitable for school environments",
-      "Flexible hire options for short or long-term needs",
+      "Ongoing, long-term hire options to suit each facility",
     ],
   },
   {
@@ -144,7 +123,7 @@ export default function Page() {
         eyebrow="Industries"
         crumb="Industries"
         title="Industries We Serve"
-        intro="Koolacube provides reliable, portable cooling solutions designed for the unique needs of multiple sectors—including hospitality, events, aged care, healthcare, education, construction and mining. Our cold rooms deliver consistent temperature control, easy mobility and full compliance, making them the preferred choice across Australia."
+        intro="Koolacube provides reliable, portable cooling solutions designed for the unique needs of multiple sectors—including hospitality, aged care, healthcare, education, construction and mining. Our cold rooms deliver consistent temperature control, easy mobility and full compliance, making them the preferred choice across Australia."
       />
 
       {/* Quick jump */}

@@ -9,11 +9,11 @@ import {
 export const metadata: Metadata = {
   title: "Cold Room Hire | Koolacube",
   description:
-    "Mobile and modular cold room hire Australia-wide. Chillers (0°C to +5°C) and freezer rooms (-20°C) for short-term, long-term and seasonal use. Fast on-site delivery & setup.",
+    "Mobile and modular cold room hire Australia-wide. Chillers (0°C to +5°C) and freezer rooms (-20°C) for long-term and seasonal commercial use. Fast on-site delivery & setup.",
   openGraph: {
     title: "Cold Room Hire | Koolacube",
     description:
-      "Mobile and modular cold room hire for commercial, industrial and event use. Fast delivery, easy setup and 24/7 support.",
+      "Mobile and modular cold room hire for commercial and industrial use. Fast delivery, easy setup and 24/7 support.",
   },
 };
 
@@ -21,16 +21,16 @@ const data: HireData = {
   crumb: "Hire / Cold Room",
   title: "Cold Room Hire Options",
   intro:
-    "We provide mobile cold rooms and modular cold room hire Australia-wide for commercial, industrial and event use. Available as chillers (0°C to +5°C) and freezer rooms (-20°C).",
+    "We provide mobile cold rooms and modular cold room hire Australia-wide for commercial and industrial use. Available as chillers (0°C to +5°C) and freezer rooms (-20°C).",
   optionsTitle: "Flexible hire to suit any project",
   options: [
     {
-      title: "Short-term hire",
-      desc: "Ideal for events, pop-ups, functions and emergencies.",
-    },
-    {
       title: "Long-term hire",
       desc: "Perfect for hospitality, healthcare, aged-care and industrial applications.",
+    },
+    {
+      title: "Monthly commercial hire",
+      desc: "Simple monthly billing for ongoing cold storage as your business grows.",
     },
     {
       title: "Seasonal hire",
@@ -43,9 +43,9 @@ const data: HireData = {
   ],
   rangeTitle: "Our Cold Room Hire Range",
   rangeIntro:
-    "Looking for short-term or long-term refrigerated storage? Our mobile cold rooms are designed to deliver consistent temperature control, high performance and complete peace of mind—no matter the industry or location. From small events to large-scale commercial projects, we provide fast delivery, easy setup and 24/7 support.",
+    "Looking for long-term refrigerated storage? Our mobile cold rooms are designed to deliver consistent temperature control, high performance and complete peace of mind—no matter the industry or location. From small cafés to large-scale commercial operations, we provide fast delivery, easy setup and 24/7 support.",
   range: [
-    { title: "Mobile Cold Rooms", desc: "Ideal for catering, events & festivals." },
+    { title: "Mobile Cold Rooms", desc: "Ideal for catering, hospitality & retail." },
     { title: "Modular Walk-In Cold Rooms", desc: "Large-scale storage, built onsite." },
     { title: "Emergency Cold Storage Hire", desc: "Urgent breakdown backup." },
     { title: "Freezer Room Hire", desc: "Perfect for frozen food storage." },
@@ -70,9 +70,9 @@ const data: HireData = {
   ],
   sizesTitle: "Standard Cold Room Sizes",
   sizes: [
-    { size: "3m Unit", desc: "Small events, backup storage, cafes." },
+    { size: "3m Unit", desc: "Small kitchens, backup storage, cafes." },
     { size: "6m Unit", desc: "Catering, restaurants, aged-care, florists." },
-    { size: "9m Unit", desc: "Large events, construction, bulk food storage." },
+    { size: "9m Unit", desc: "Food manufacturing, construction, bulk food storage." },
   ],
   sizesNote: "Custom configurations available on request.",
   useCasesTitle: "Use Cases",

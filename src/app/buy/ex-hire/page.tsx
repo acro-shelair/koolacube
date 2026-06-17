@@ -47,7 +47,7 @@ const data: BuyData = {
   sizesTitle: "Standard Cold Room Sizes",
   sizesIntro: "Ex-hire availability changes regularly — common sizes include:",
   sizes: [
-    { size: "3m Unit", suited: "Cafés, pop-ups, small kitchens", availability: "Ex-Hire" },
+    { size: "3m Unit", suited: "Cafés, retail, small kitchens", availability: "Ex-Hire" },
     { size: "6m Unit", suited: "Restaurants, florists, aged-care", availability: "Ex-Hire" },
     { size: "9m Unit", suited: "Large venues, industrial use", availability: "Ex-Hire / New" },
   ],

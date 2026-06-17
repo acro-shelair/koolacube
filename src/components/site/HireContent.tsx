@@ -42,7 +42,7 @@ export const defaultAdvantages: HireData["advantages"] = [
   {
     icon: Boxes,
     title: "Extra Cold Space On Demand",
-    desc: "Running out of chilled storage during peak seasons or events? Our modular cold rooms give you flexible extra space when you need it – no downtime, no hassle.",
+    desc: "Running out of chilled storage during peak seasons or expansion? Our modular cold rooms give you flexible extra space when you need it – no downtime, no hassle.",
   },
   {
     icon: Wrench,
@@ -53,8 +53,8 @@ export const defaultAdvantages: HireData["advantages"] = [
 
 export const defaultUseCases: HireData["useCases"] = [
   {
-    title: "Events & Functions",
-    desc: "Perfect for weddings, festivals, corporate events and parties needing temporary refrigerated storage.",
+    title: "Food Manufacturing",
+    desc: "Dependable, food-grade cold storage to support production, processing and ongoing bulk stock requirements.",
   },
   {
     title: "Hospitality",

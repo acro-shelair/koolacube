@@ -47,11 +47,11 @@ export default function Page() {
           <p>
             Built on decades of technical expertise and powered by the strength of the
             <strong className="text-foreground"> HVACR Group</strong>, our products are engineered to perform
-            in real-world conditions — on worksites, in commercial kitchens, at major events
-            and everywhere in between.
+            in real-world conditions — on worksites, in commercial kitchens, in food
+            production and everywhere in between.
           </p>
           <p>
-            From short-term hire to permanent installations, we offer smart, flexible and
+            From long-term hire to permanent installations, we offer smart, flexible and
             durable temperature-controlled storage designed to meet the needs of modern
             businesses.
           </p>
@@ -133,7 +133,7 @@ export default function Page() {
               Compliance, Reliability &amp; Safety First
             </h2>
             <p className="mt-4 text-foreground/75 md:text-lg">
-              Whether you're in hospitality, healthcare, construction or events, you can
+              Whether you're in hospitality, healthcare, construction or food manufacturing, you can
               rely on Koolacube for stable temperatures, operational safety and continuous
               performance.
             </p>
