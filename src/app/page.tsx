@@ -21,14 +21,15 @@ const unitFreezer = "/unit-freezer.jpg";
 const unitDual = "/unit-dual.jpg";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/" },
   title: "Koolacube — Long-Term Commercial Cold Room Hire | SE QLD",
   description:
     "Relocatable cold rooms and freezer rooms for businesses across Brisbane, Gold Coast and SE QLD. Monthly hire from $440 + GST. Delivery, setup and maintenance backed by ACRO Refrigeration.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Koolacube — Commercial Cold Room Hire SE Queensland",
     description:
       "Monthly cold room, freezer and dual-temp hire for businesses. Backed by qualified refrigeration technicians.",
-    images: [heroImg],
   },
 };
 

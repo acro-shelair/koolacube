@@ -4,10 +4,12 @@ import { ContactForm } from "@/components/site/ContactForm";
 import { Phone, Mail, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact — Get a Cold Room Hire Quote | Koolacube",
   description:
     "Enquire about commercial cold room or freezer room hire and sales across SE Queensland. Minimum hire terms apply.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Contact Koolacube — Cold Room Hire Enquiry",
     description: "Tell us about your site and we'll quote monthly hire or sale.",
   },

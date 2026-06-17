@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE } from "@/lib/site";
+import { localBusinessSchema, websiteSchema } from "@/lib/jsonld";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,20 +22,67 @@ const barlow = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://koolacube.com.au"),
-  title: "Koolacube — Commercial Cold Room & Freezer Hire SE Queensland",
-  description:
-    "Long-term commercial cold room and freezer room hire and sales across Brisbane, Gold Coast and SE QLD. Monthly hire, delivery, setup and maintenance support.",
-  authors: [{ name: "Koolacube" }],
+  metadataBase: new URL(SITE.url),
+  title: {
+    default: `${SITE.name} — ${SITE.tagline}`,
+    template: `%s | ${SITE.name}`,
+  },
+  description: SITE.description,
+  applicationName: SITE.name,
+  authors: [{ name: SITE.name }],
+  creator: SITE.name,
+  publisher: SITE.name,
+  keywords: [
+    "cold room hire",
+    "freezer room hire",
+    "commercial cold room",
+    "portable cold room",
+    "cold room hire Brisbane",
+    "cold room hire Gold Coast",
+    "cold room hire Sunshine Coast",
+    "cold storage hire",
+    "long-term cold room hire",
+    "cold rooms for sale",
+    "SE Queensland",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
   openGraph: {
-    title: "Koolacube — Commercial Cold Room Hire SE Queensland",
-    description:
-      "Relocatable cold rooms and freezer rooms for businesses. Monthly hire from $440 + GST. Backed by ACRO Refrigeration.",
     type: "website",
+    siteName: SITE.name,
+    locale: SITE.locale,
+    url: SITE.url,
+    title: `${SITE.name} — ${SITE.tagline}`,
+    description: SITE.description,
+    // og:image is provided site-wide by the file-based app/opengraph-image.tsx
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
+    title: `${SITE.name} — ${SITE.tagline}`,
+    description: SITE.description,
+    // twitter:image is provided by the file-based app/twitter-image.tsx
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#2c97d1",
 };
 
 export default function RootLayout({
@@ -41,8 +91,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${barlow.variable}`}>
+    <html lang="en-AU" className={`${inter.variable} ${barlow.variable}`}>
       <body>
+        <JsonLd data={[localBusinessSchema(), websiteSchema()]} />
         <div className="flex min-h-screen flex-col bg-background">
           <SiteHeader />
           <main className="flex-1">{children}</main>

@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/site/ContentPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/ex-hire-cold-rooms-for-sale" },
   title: "Ex-Hire Cold Rooms for Sale | Koolacube",
   description: "Refurbished ex-hire cold rooms available for sale. Tested before sale. Stock changes regularly.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Ex-Hire Cold Rooms for Sale | Koolacube",
     description: "Refurbished ex-hire cold rooms available for sale. Tested before sale. Stock changes regularly.",
   },

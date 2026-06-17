@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/site/ContentPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/cold-room-hire-sunshine-coast" },
   title: "Cold Room Hire Sunshine Coast | Koolacube",
   description: "Sunshine Coast cold room hire for businesses needing reliable cold storage. Talk to us about coverage outside the 50km zone.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Cold Room Hire Sunshine Coast | Koolacube",
     description: "Sunshine Coast cold room hire for businesses needing reliable cold storage. Talk to us about coverage outside the 50km zone.",
   },

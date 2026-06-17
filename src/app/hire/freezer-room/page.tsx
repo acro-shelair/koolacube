@@ -7,10 +7,12 @@ import {
 } from "@/components/site/HireContent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/hire/freezer-room" },
   title: "Freezer Room Hire | Koolacube",
   description:
     "Mobile and modular freezer room hire down to -25°C for meat, seafood, frozen goods and long-term preservation. Long-term and seasonal commercial hire with fast on-site delivery.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Freezer Room Hire | Koolacube",
     description:
       "Deep-freeze room hire for commercial and industrial use. Fast delivery, easy setup and 24/7 support.",
@@ -78,6 +80,7 @@ const data: HireData = {
   useCasesTitle: "Use Cases",
   useCasesIntro: "Our portable freezer rooms are trusted across a wide range of industries:",
   useCases: defaultUseCases,
+  monthlyPriceFrom: 750,
 };
 
 export default function Page() {

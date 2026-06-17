@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageHero, CtaStrip } from "./PageHero";
 import { defaultAdvantages } from "./HireContent";
+import { ProductJsonLd } from "./ProductJsonLd";
 import { Check, ShieldCheck, ArrowRight, type LucideIcon } from "lucide-react";
 
 export { defaultAdvantages };
@@ -30,6 +31,10 @@ export type BuyData = {
   whyTitle: string;
   why: { title: string; desc: string }[];
   ctaLabel?: string;
+  /** Product JSON-LD (Offer) hints — defaults: ogImage, InStock, NewCondition. */
+  productImage?: string;
+  productAvailability?: string;
+  productCondition?: string;
 };
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
@@ -43,6 +48,13 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 export function BuyContent({ data }: { data: BuyData }) {
   return (
     <>
+      <ProductJsonLd
+        name={data.title}
+        description={data.intro}
+        image={data.productImage}
+        availability={data.productAvailability}
+        itemCondition={data.productCondition}
+      />
       <PageHero eyebrow="Buy" crumb={data.crumb} title={data.title} intro={data.intro} />
 
       {/* Sales options */}

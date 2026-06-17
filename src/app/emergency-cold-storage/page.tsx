@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/site/ContentPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/emergency-cold-storage" },
   title: "Emergency Cold Storage | Koolacube",
   description: "When your existing cold room fails, Koolacube can supply replacement cold storage. Subject to availability — call 1300 561 030 anytime.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Emergency Cold Storage | Koolacube",
     description: "When your existing cold room fails, Koolacube can supply replacement cold storage. Subject to availability — call 1300 561 030 anytime.",
   },

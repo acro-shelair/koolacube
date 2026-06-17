@@ -3,10 +3,12 @@ import { Wrench, Wallet, RefreshCw } from "lucide-react";
 import { HireContent, type HireData } from "@/components/site/HireContent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/hire/long-term" },
   title: "Long-Term Cold Room Hire | Koolacube",
   description:
     "Long-term commercial cold room and freezer hire — weeks, months or ongoing. Monthly billing, maintenance-backed units and the option to convert to purchase. Not short-term party or event hire.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Long-Term Cold Room Hire | Koolacube",
     description:
       "Ongoing commercial cold, freezer and dual temp hire. Monthly billing, maintenance included, hire-to-buy available.",
@@ -115,6 +117,7 @@ const data: HireData = {
       desc: "Extra chilled and frozen capacity to support trading through the year.",
     },
   ],
+  monthlyPriceFrom: 440,
 };
 
 export default function Page() {

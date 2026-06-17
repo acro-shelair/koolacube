@@ -7,10 +7,12 @@ import {
 } from "@/components/site/HireContent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/hire/dual-temp" },
   title: "Dual Temp Room Hire | Koolacube",
   description:
     "Hire one portable unit with two independent zones — a chiller (+2°C to +10°C) and a freezer (-18°C to -25°C). Separate doors, thermostats and refrigeration for chilled and frozen storage at once.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Dual Temp Room Hire | Koolacube",
     description:
       "Chiller + freezer in one portable unit. Independent temperature zones for maximum efficiency.",
@@ -78,6 +80,7 @@ const data: HireData = {
   useCasesTitle: "Use Cases",
   useCasesIntro: "Our dual temp rooms are trusted across a wide range of industries:",
   useCases: defaultUseCases,
+  monthlyPriceFrom: 850,
 };
 
 export default function Page() {

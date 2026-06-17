@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/site/ContentPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/cold-room-sales-queensland" },
   title: "Cold Room Sales Queensland | Koolacube",
   description: "Buy new or ex-hire cold rooms across Queensland. Commercial grade, supported by ACRO Refrigeration.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Cold Room Sales Queensland | Koolacube",
     description: "Buy new or ex-hire cold rooms across Queensland. Commercial grade, supported by ACRO Refrigeration.",
   },

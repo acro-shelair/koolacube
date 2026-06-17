@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/site/ContentPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/cold-room-hire-for-restaurants" },
   title: "Cold Room Hire for Restaurants | Koolacube",
   description: "Restaurant cold room hire across SE QLD — for renovations, expansion, overflow stock and seasonal demand.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Cold Room Hire for Restaurants | Koolacube",
     description: "Restaurant cold room hire across SE QLD — for renovations, expansion, overflow stock and seasonal demand.",
   },

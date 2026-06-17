@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
+import { BreadcrumbJsonLd } from "./Breadcrumbs";
 
 export function PageHero({
   eyebrow,
@@ -14,6 +15,7 @@ export function PageHero({
 }) {
   return (
     <section className="border-b border-border bg-navy-deep text-white">
+      <BreadcrumbJsonLd title={title} />
       <div className="mx-auto max-w-7xl px-4 py-16 md:py-20">
         <div className="flex items-center gap-1 text-xs uppercase tracking-widest text-white/50">
           <Link href="/" className="hover:text-white">

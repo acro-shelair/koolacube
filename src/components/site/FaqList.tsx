@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { JsonLd } from "@/components/JsonLd";
+import { faqSchema } from "@/lib/jsonld";
 
 const faqs = [
   {
@@ -65,6 +67,7 @@ const faqs = [
 export function FaqList() {
   return (
     <div className="mt-10 divide-y divide-border overflow-hidden rounded-lg border border-border bg-white">
+      <JsonLd data={faqSchema(faqs)} />
       {faqs.map((f, i) => (
         <FaqItem key={i} q={f.q} a={f.a} />
       ))}

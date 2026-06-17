@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { BuyContent, defaultAdvantages, type BuyData } from "@/components/site/BuyContent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/buy/ex-hire" },
   title: "Ex-Hire Cold Rooms for Sale | Koolacube",
   description:
     "Fully serviced and tested ex-hire cold rooms, freezer rooms and dual temp units for sale. A cost-effective way into commercial cold storage. Stock changes regularly — call to confirm.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Ex-Hire Cold Rooms for Sale | Koolacube",
     description:
       "Professionally refurbished ex-hire cold rooms for sale. Commercial-grade, relocatable, cost-effective.",
@@ -71,6 +73,9 @@ const data: BuyData = {
       desc: "Supported by qualified refrigeration technicians and the HVACR Group.",
     },
   ],
+  productImage: "/unit-coldroom.jpg",
+  productAvailability: "https://schema.org/LimitedAvailability",
+  productCondition: "https://schema.org/RefurbishedCondition",
 };
 
 export default function Page() {

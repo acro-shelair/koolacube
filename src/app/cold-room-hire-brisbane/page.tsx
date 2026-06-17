@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { ContentPage } from "@/components/site/ContentPage";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/cold-room-hire-brisbane" },
   title: "Cold Room Hire Brisbane | Koolacube",
   description: "Long-term commercial cold room hire across greater Brisbane. Monthly hire from $440 + GST, delivery and maintenance backed by ACRO Refrigeration.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Cold Room Hire Brisbane | Koolacube",
     description: "Long-term commercial cold room hire across greater Brisbane. Monthly hire from $440 + GST, delivery and maintenance backed by ACRO Refrigeration.",
   },

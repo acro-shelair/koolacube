@@ -1,39 +1,47 @@
 import type { MetadataRoute } from "next";
+import { SITE } from "@/lib/site";
 
-// Update to the production domain when the site goes live.
-const SITE_URL = "https://koolacube.com.au";
+type Entry = {
+  path: string;
+  priority: number;
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+};
 
-const paths = [
-  "/",
-  "/hire/cold-room",
-  "/hire/freezer-room",
-  "/hire/dual-temp",
-  "/hire/long-term",
-  "/buy/new",
-  "/buy/ex-hire",
-  "/buy/custom",
-  "/available-units",
-  "/industries",
-  "/service-areas",
-  "/about",
-  "/contact",
-  "/cold-room-hire-brisbane",
-  "/freezer-room-hire-brisbane",
-  "/cold-room-hire-gold-coast",
-  "/cold-room-hire-sunshine-coast",
-  "/cold-room-sales-queensland",
-  "/ex-hire-cold-rooms-for-sale",
-  "/cold-room-hire-for-butchers",
-  "/cold-room-hire-for-restaurants",
-  "/cold-room-hire-for-food-manufacturers",
-  "/cold-room-hire-for-aged-care",
-  "/emergency-cold-storage",
-  "/cold-room-hire-during-renovations",
+// Priority reflects relative importance: home > core hire/buy > locations/industries > info.
+const entries: Entry[] = [
+  { path: "/", priority: 1.0, changeFrequency: "weekly" },
+  { path: "/hire/cold-room", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/hire/freezer-room", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/hire/dual-temp", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/hire/long-term", priority: 0.9, changeFrequency: "weekly" },
+  { path: "/buy/new", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/buy/ex-hire", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/buy/custom", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/available-units", priority: 0.8, changeFrequency: "weekly" },
+  { path: "/industries", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/service-areas", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/about", priority: 0.5, changeFrequency: "monthly" },
+  { path: "/contact", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/cold-room-hire-brisbane", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/freezer-room-hire-brisbane", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/cold-room-hire-gold-coast", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/cold-room-hire-sunshine-coast", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/cold-room-sales-queensland", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/ex-hire-cold-rooms-for-sale", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/cold-room-hire-for-butchers", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/cold-room-hire-for-restaurants", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/cold-room-hire-for-food-manufacturers", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/cold-room-hire-for-aged-care", priority: 0.6, changeFrequency: "monthly" },
+  { path: "/emergency-cold-storage", priority: 0.7, changeFrequency: "monthly" },
+  { path: "/cold-room-hire-during-renovations", priority: 0.6, changeFrequency: "monthly" },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return paths.map((p) => ({
-    url: `${SITE_URL}${p}`,
-    changeFrequency: "weekly",
+  const lastModified = new Date();
+  return entries.map((e) => ({
+    url: `${SITE.url}${e.path}`,
+    lastModified,
+    changeFrequency: e.changeFrequency,
+    priority: e.priority,
   }));
 }

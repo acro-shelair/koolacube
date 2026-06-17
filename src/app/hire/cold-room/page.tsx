@@ -7,10 +7,12 @@ import {
 } from "@/components/site/HireContent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/hire/cold-room" },
   title: "Cold Room Hire | Koolacube",
   description:
     "Mobile and modular cold room hire Australia-wide. Chillers (0°C to +5°C) and freezer rooms (-20°C) for long-term and seasonal commercial use. Fast on-site delivery & setup.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Cold Room Hire | Koolacube",
     description:
       "Mobile and modular cold room hire for commercial and industrial use. Fast delivery, easy setup and 24/7 support.",
@@ -78,6 +80,7 @@ const data: HireData = {
   useCasesTitle: "Use Cases",
   useCasesIntro: "Our portable cold rooms are trusted across a wide range of industries:",
   useCases: defaultUseCases,
+  monthlyPriceFrom: 440,
 };
 
 export default function Page() {

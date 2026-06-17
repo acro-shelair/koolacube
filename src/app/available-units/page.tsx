@@ -11,10 +11,12 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/available-units" },
   title: "Available Units — Cooler, Freezer & Dual Temp Rooms | Koolacube",
   description:
     "Portable cooler rooms, freezer rooms and dual temp rooms in 3m, 6m and 9m sizes. Full specifications, temperature ranges and ideal applications. Custom builds available.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Available Units | Koolacube",
     description:
       "Portable cooler rooms, freezer rooms and dual temp rooms — full specifications and ideal applications.",

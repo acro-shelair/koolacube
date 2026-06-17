@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { BuyContent, defaultAdvantages, type BuyData } from "@/components/site/BuyContent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/buy/new" },
   title: "Cold Room Sales — Buy New & Ex-Hire | Koolacube",
   description:
     "Buy new, ex-hire and custom-built portable cold rooms. Built for easy relocation, low running costs and long-lasting commercial performance. Delivery & on-site setup available.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Cold Room Sales | Koolacube",
     description:
       "New, ex-hire and custom portable cold rooms for sale. Commercial-grade build, relocatable, compliant.",
@@ -83,6 +85,9 @@ const data: BuyData = {
       desc: "Flexible finance options are available, making ownership cost-effective and accessible for businesses of all sizes.",
     },
   ],
+  productImage: "/unit-coldroom.jpg",
+  productAvailability: "https://schema.org/InStock",
+  productCondition: "https://schema.org/NewCondition",
 };
 
 export default function Page() {

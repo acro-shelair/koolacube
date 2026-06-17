@@ -13,10 +13,12 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/industries" },
   title: "Industries We Serve | Koolacube",
   description:
     "Portable cooling solutions for hospitality, aged care, healthcare, education, construction and mining. Reliable temperature control, easy mobility and full compliance across Australia.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Industries We Serve | Koolacube",
     description:
       "Tailored portable cold room and freezer solutions for hospitality, aged care, education, construction and mining.",

@@ -3,10 +3,12 @@ import { PageHero, CtaStrip } from "@/components/site/PageHero";
 import { Check, Snowflake, ShieldCheck, Truck, Wrench, Thermometer, Lock, ClipboardCheck, Cpu } from "lucide-react";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About Koolacube | Koolacube",
   description:
     "Koolacube delivers portable cool rooms, freezer rooms and dual-temp units across Australia. Backed by HVACR Group, Acro Refrigeration and Shelair Air Conditioning.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "About Koolacube | Koolacube",
     description:
       "Portable cooling solutions backed by HVACR Group industry expertise — compliant, reliable, locally supported.",

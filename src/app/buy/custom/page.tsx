@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { BuyContent, defaultAdvantages, type BuyData } from "@/components/site/BuyContent";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/buy/custom" },
   title: "Custom Cold Room Builds | Koolacube",
   description:
     "Custom cold rooms, freezer rooms and dual temp units built for unusual sites, sizes or temperature requirements. Engineered and supported by HVACR Group / ACRO Refrigeration.",
   openGraph: {
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
     title: "Custom Cold Room Builds | Koolacube",
     description:
       "Cold rooms engineered around your site — any size, specialty temperatures, multi-zone configurations.",
@@ -71,6 +73,9 @@ const data: BuyData = {
       desc: "Optional service plans, spare parts and maintenance to protect your investment.",
     },
   ],
+  productImage: "/unit-dual.jpg",
+  productAvailability: "https://schema.org/MadeToOrder",
+  productCondition: "https://schema.org/NewCondition",
 };
 
 export default function Page() {

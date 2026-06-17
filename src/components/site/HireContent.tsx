@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageHero, CtaStrip } from "./PageHero";
+import { ServiceJsonLd } from "./ServiceJsonLd";
 import {
   Check,
   Snowflake,
@@ -30,6 +31,8 @@ export type HireData = {
   useCasesTitle: string;
   useCasesIntro?: string;
   useCases: { title: string; desc: string }[];
+  /** Monthly "from" price (ex-GST) for Service Offer JSON-LD. */
+  monthlyPriceFrom?: number;
 };
 
 /* Shared content reused across hire tabs unless a page overrides it. */
@@ -85,6 +88,11 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 export function HireContent({ data }: { data: HireData }) {
   return (
     <>
+      <ServiceJsonLd
+        name={data.title}
+        description={data.intro}
+        monthlyPriceFrom={data.monthlyPriceFrom}
+      />
       <PageHero eyebrow="Hire" crumb={data.crumb} title={data.title} intro={data.intro} />
 
       {/* Hire options */}
