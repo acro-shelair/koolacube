@@ -1,64 +1,74 @@
 "use client";
 
 import { useState } from "react";
-import { z } from "zod";
 import { Check } from "lucide-react";
+import { submitEnquiry } from "@/app/(site)/contact/actions";
+import {
+  OPTIONAL_FIELD_META,
+  type ContactFormConfig,
+  type OptionalKey,
+} from "@/lib/content/contact-form";
 
-const schema = z.object({
-  name: z.string().trim().min(1, "Name required").max(120),
-  business: z.string().trim().max(160).optional().or(z.literal("")),
-  phone: z.string().trim().min(6, "Phone required").max(40),
-  email: z.string().trim().email("Valid email required").max(255),
-  suburb: z.string().trim().min(1, "Suburb / site location required").max(160),
-  need: z.enum(["Cold Room", "Freezer Room", "Dual Temp", "Unsure"]),
-  mode: z.enum(["Hire", "Buy"]),
-  startDate: z.string().trim().max(60).optional().or(z.literal("")),
-  duration: z.string().trim().max(120).optional().or(z.literal("")),
-  product: z.string().trim().max(255).optional().or(z.literal("")),
-  volume: z.string().trim().max(120).optional().or(z.literal("")),
-  power: z.string().trim().max(120).optional().or(z.literal("")),
-  access: z.array(z.string()).default([]),
-  message: z.string().trim().max(2000).optional().or(z.literal("")),
-  acknowledge: z.literal(true, {
-    errorMap: () => ({ message: "Please acknowledge to continue" }),
-  }),
-});
+const EMAIL_RE = /^\S+@\S+\.\S+$/;
 
-export function ContactForm() {
+export function ContactForm({ config }: { config: ContactFormConfig }) {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const visibleOptional = config.optionalFields.filter((f) => f.visible);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
+    const get = (k: string) => String(fd.get(k) || "").trim();
+
     const data = {
-      name: String(fd.get("name") || ""),
-      business: String(fd.get("business") || ""),
-      phone: String(fd.get("phone") || ""),
-      email: String(fd.get("email") || ""),
-      suburb: String(fd.get("suburb") || ""),
-      need: String(fd.get("need") || "Unsure") as "Cold Room" | "Freezer Room" | "Dual Temp" | "Unsure",
-      mode: String(fd.get("mode") || "Hire") as "Hire" | "Buy",
-      startDate: String(fd.get("startDate") || ""),
-      duration: String(fd.get("duration") || ""),
-      product: String(fd.get("product") || ""),
-      volume: String(fd.get("volume") || ""),
-      power: String(fd.get("power") || ""),
+      name: get("name"),
+      business: get("business"),
+      phone: get("phone"),
+      email: get("email"),
+      suburb: get("suburb"),
+      need: get("need") || config.needOptions[0] || "Unsure",
+      mode: get("mode") || config.modeOptions[0] || "Hire",
+      startDate: get("startDate"),
+      duration: get("duration"),
+      product: get("product"),
+      volume: get("volume"),
+      power: get("power"),
       access: fd.getAll("access").map(String),
-      message: String(fd.get("message") || ""),
-      acknowledge: fd.get("acknowledge") === "on" ? true : undefined,
+      message: get("message"),
     };
-    const parsed = schema.safeParse(data);
-    if (!parsed.success) {
-      const errs: Record<string, string> = {};
-      for (const issue of parsed.error.issues) {
-        const k = String(issue.path[0]);
-        if (!errs[k]) errs[k] = issue.message;
+
+    // Validation: core fields + any visible optional field marked required.
+    const errs: Record<string, string> = {};
+    if (!data.name) errs.name = "Name required";
+    if (data.phone.length < 6) errs.phone = "Phone required";
+    if (!EMAIL_RE.test(data.email)) errs.email = "Valid email required";
+    if (!data.suburb) errs.suburb = `${config.suburbLabel} required`;
+    for (const f of visibleOptional) {
+      if (f.required && !String(data[f.key] || "").trim()) {
+        errs[f.key] = `${f.label} required`;
       }
+    }
+    if (config.acknowledgeRequired && fd.get("acknowledge") !== "on") {
+      errs.acknowledge = "Please acknowledge to continue";
+    }
+    if (Object.keys(errs).length > 0) {
       setErrors(errs);
       return;
     }
+
     setErrors({});
+    setServerError(null);
+    setSending(true);
+    const result = await submitEnquiry(data);
+    setSending(false);
+    if (result?.error) {
+      setServerError(result.error);
+      return;
+    }
     setSubmitted(true);
   }
 
@@ -68,13 +78,18 @@ export function ContactForm() {
         <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-cold-blue/10 text-cold-blue">
           <Check className="h-7 w-7" />
         </div>
-        <h2 className="mt-5 font-display text-2xl font-bold">Enquiry received.</h2>
+        <h2 className="mt-5 font-display text-2xl font-bold">
+          {config.successHeading}
+        </h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Thanks — we'll be in touch shortly. For urgent matters call 1300 561 030.
+          {config.successText}
         </p>
       </div>
     );
   }
+
+  const showOptional = (key: OptionalKey) =>
+    visibleOptional.find((f) => f.key === key);
 
   return (
     <form
@@ -83,28 +98,54 @@ export function ContactForm() {
       className="space-y-5 rounded-lg border border-border bg-white p-6 md:p-8"
     >
       <div className="grid gap-5 md:grid-cols-2">
-        <Field label="Name" name="name" required error={errors.name} />
-        <Field label="Business Name" name="business" error={errors.business} />
-        <Field label="Phone" name="phone" type="tel" required error={errors.phone} />
-        <Field label="Email" name="email" type="email" required error={errors.email} />
         <Field
-          label="Suburb / Site Location"
+          label={config.nameLabel}
+          name="name"
+          required
+          error={errors.name}
+        />
+        {showOptional("business") && (
+          <Field
+            label={fieldLabel(config, "business")}
+            name="business"
+            required={fieldReq(config, "business")}
+            error={errors.business}
+          />
+        )}
+        <Field
+          label={config.phoneLabel}
+          name="phone"
+          type="tel"
+          required
+          error={errors.phone}
+        />
+        <Field
+          label={config.emailLabel}
+          name="email"
+          type="email"
+          required
+          error={errors.email}
+        />
+        <Field
+          label={config.suburbLabel}
           name="suburb"
           required
           error={errors.suburb}
         />
         <SelectField
-          label="Need"
+          label={config.needLabel}
           name="need"
           error={errors.need}
-          options={["Cold Room", "Freezer Room", "Dual Temp", "Unsure"]}
+          options={config.needOptions}
         />
       </div>
 
       <fieldset>
-        <legend className="text-sm font-semibold text-foreground">Hire or Buy</legend>
+        <legend className="text-sm font-semibold text-foreground">
+          {config.modeLegend}
+        </legend>
         <div className="mt-3 flex gap-3">
-          {["Hire", "Buy"].map((v, i) => (
+          {config.modeOptions.map((v, i) => (
             <label
               key={v}
               className="flex flex-1 cursor-pointer items-center gap-2 rounded border border-border bg-white px-4 py-3 text-sm hover:border-cold-blue has-[:checked]:border-cold-blue has-[:checked]:bg-cold-blue/5"
@@ -122,83 +163,120 @@ export function ContactForm() {
         </div>
       </fieldset>
 
-      <div className="grid gap-5 md:grid-cols-2">
-        <Field label="Required Start Date" name="startDate" type="date" />
-        <Field
-          label="Expected Hire Duration"
-          name="duration"
-          placeholder="e.g. 3 months"
-        />
-        <Field
-          label="Product Stored"
-          name="product"
-          placeholder="e.g. meat, dairy, produce"
-        />
-        <Field
-          label="Approximate Storage Volume"
-          name="volume"
-          placeholder="e.g. 6 pallets"
-        />
-        <Field
-          label="Existing Power Supply"
-          name="power"
-          placeholder="e.g. 240V 15A / 3-phase / unsure"
-        />
-      </div>
-
-      <fieldset>
-        <legend className="text-sm font-semibold text-foreground">Site Access</legend>
-        <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
-          {["Forklift", "Crane", "Truck Access", "Unsure"].map((v) => (
-            <label
-              key={v}
-              className="flex cursor-pointer items-center gap-2 rounded border border-border bg-white px-3 py-2.5 text-sm hover:border-cold-blue has-[:checked]:border-cold-blue has-[:checked]:bg-cold-blue/5"
-            >
-              <input
-                type="checkbox"
-                name="access"
-                value={v}
-                className="accent-cold-blue"
+      {(showOptional("startDate") ||
+        showOptional("duration") ||
+        showOptional("product") ||
+        showOptional("volume") ||
+        showOptional("power")) && (
+        <div className="grid gap-5 md:grid-cols-2">
+          {(
+            [
+              "startDate",
+              "duration",
+              "product",
+              "volume",
+              "power",
+            ] as OptionalKey[]
+          ).map((key) =>
+            showOptional(key) ? (
+              <Field
+                key={key}
+                label={fieldLabel(config, key)}
+                name={key}
+                type={
+                  OPTIONAL_FIELD_META[key].type === "date" ? "date" : "text"
+                }
+                placeholder={OPTIONAL_FIELD_META[key].placeholder}
+                required={fieldReq(config, key)}
+                error={errors[key]}
               />
-              {v}
-            </label>
-          ))}
+            ) : null
+          )}
         </div>
-      </fieldset>
+      )}
 
-      <div>
-        <label className="text-sm font-semibold text-foreground">Message</label>
-        <textarea
-          name="message"
-          rows={5}
-          maxLength={2000}
-          className="mt-2 w-full rounded border border-border bg-white px-3 py-2.5 text-sm outline-none focus:border-cold-blue"
-        />
-      </div>
+      {config.accessOptions.length > 0 && (
+        <fieldset>
+          <legend className="text-sm font-semibold text-foreground">
+            {config.accessLegend}
+          </legend>
+          <div className="mt-3 grid grid-cols-2 gap-2 md:grid-cols-4">
+            {config.accessOptions.map((v) => (
+              <label
+                key={v}
+                className="flex cursor-pointer items-center gap-2 rounded border border-border bg-white px-3 py-2.5 text-sm hover:border-cold-blue has-[:checked]:border-cold-blue has-[:checked]:bg-cold-blue/5"
+              >
+                <input
+                  type="checkbox"
+                  name="access"
+                  value={v}
+                  className="accent-cold-blue"
+                />
+                {v}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
 
-      <label className="flex items-start gap-3 rounded border border-border bg-muted/30 p-4 text-sm">
-        <input
-          type="checkbox"
-          name="acknowledge"
-          className="mt-0.5 accent-cold-blue"
-        />
-        <span>
-          I understand Koolacube is focused on business, long-term hire and sales —
-          not short-term party or event hire.
-        </span>
-      </label>
-      {errors.acknowledge && (
-        <p className="text-xs text-orange">{errors.acknowledge}</p>
+      {showOptional("message") && (
+        <div>
+          <label className="text-sm font-semibold text-foreground">
+            {fieldLabel(config, "message")}
+            {fieldReq(config, "message") && (
+              <span className="ml-1 text-orange">*</span>
+            )}
+          </label>
+          <textarea
+            name="message"
+            rows={5}
+            maxLength={2000}
+            className="mt-2 w-full rounded border border-border bg-white px-3 py-2.5 text-sm outline-none focus:border-cold-blue"
+          />
+          {errors.message && (
+            <p className="mt-1 text-xs text-orange">{errors.message}</p>
+          )}
+        </div>
+      )}
+
+      {config.acknowledgeText && (
+        <>
+          <label className="flex items-start gap-3 rounded border border-border bg-muted/30 p-4 text-sm">
+            <input
+              type="checkbox"
+              name="acknowledge"
+              className="mt-0.5 accent-cold-blue"
+            />
+            <span>{config.acknowledgeText}</span>
+          </label>
+          {errors.acknowledge && (
+            <p className="text-xs text-orange">{errors.acknowledge}</p>
+          )}
+        </>
+      )}
+
+      {serverError && (
+        <p className="rounded border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+          {serverError}
+        </p>
       )}
 
       <button
         type="submit"
-        className="w-full rounded bg-orange px-5 py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-orange-hover"
+        disabled={sending}
+        className="w-full rounded bg-orange px-5 py-3.5 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-orange-hover disabled:opacity-60"
       >
-        Send Enquiry
+        {sending ? "Sending…" : config.submitLabel}
       </button>
     </form>
   );
+}
+
+function fieldLabel(config: ContactFormConfig, key: OptionalKey): string {
+  return config.optionalFields.find((f) => f.key === key)?.label ?? key;
+}
+function fieldReq(config: ContactFormConfig, key: OptionalKey): boolean {
+  return config.optionalFields.find((f) => f.key === key)?.required ?? false;
 }
 
 function Field({

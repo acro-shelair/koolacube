@@ -1,7 +1,15 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { SETTINGS_DEFAULTS, telHref, type EffectiveSettings } from "@/lib/settings";
+import { AdminLink } from "./AdminLink";
 
-export function SiteFooter() {
+export function SiteFooter({
+  settings = SETTINGS_DEFAULTS,
+}: {
+  settings?: EffectiveSettings;
+} = {}) {
+  const { address } = settings;
+  const fullAddress = `${address.streetAddress}, ${address.addressLocality} ${address.addressRegion} ${address.postalCode}`;
   return (
     <footer className="bg-navy-deep text-white/80">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 md:grid-cols-4">
@@ -16,9 +24,7 @@ export function SiteFooter() {
               KOOLACUBE
             </span>
           </div>
-          <p className="mt-4 text-sm leading-relaxed">
-            Reliable commercial cold storage for SE Queensland businesses.
-          </p>
+          <p className="mt-4 text-sm leading-relaxed">{settings.footerBlurb}</p>
           <div className="mt-5 inline-block rounded border border-white/15 px-3 py-2 text-xs">
             Backed by <span className="font-semibold text-white">HVACR Group</span> /{" "}
             <span className="font-semibold text-white">ACRO Refrigeration</span>
@@ -59,18 +65,18 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-3 text-sm">
             <li className="flex gap-3">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-orange" />
-              <span>Unit 3, 9–11 Imboon Street, Deception Bay QLD 4508</span>
+              <span>{fullAddress}</span>
             </li>
             <li className="flex gap-3">
               <Phone className="h-4 w-4 shrink-0 text-orange" />
-              <a href="tel:1300561030" className="hover:text-white">
-                1300 561 030
+              <a href={`tel:${telHref(settings.telephone)}`} className="hover:text-white">
+                {settings.telephone}
               </a>
             </li>
             <li className="flex gap-3">
               <Mail className="h-4 w-4 shrink-0 text-orange" />
-              <a href="mailto:info@koolacube.com.au" className="hover:text-white">
-                info@koolacube.com.au
+              <a href={`mailto:${settings.email}`} className="hover:text-white">
+                {settings.email}
               </a>
             </li>
           </ul>
@@ -79,7 +85,10 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-white/50 md:flex-row">
           <div>© {new Date().getFullYear()} Koolacube. All rights reserved.</div>
-          <div>Commercial cold room hire & sales · SE Queensland</div>
+          <div className="flex items-center gap-4">
+            <span>Commercial cold room hire & sales · SE Queensland</span>
+            <AdminLink />
+          </div>
         </div>
       </div>
     </footer>

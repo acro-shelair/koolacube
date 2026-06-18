@@ -3,12 +3,15 @@
  * serialised into a <script type="application/ld+json"> tag via <JsonLd>.
  */
 import { SITE, absoluteUrl } from "./site";
+import { SETTINGS_DEFAULTS, type EffectiveSettings } from "./settings";
 
 const ORG_ID = `${SITE.url}/#organization`;
 const WEBSITE_ID = `${SITE.url}/#website`;
 
 /** LocalBusiness / Organization — the core entity for local SEO. */
-export function localBusinessSchema() {
+export function localBusinessSchema(
+  settings: EffectiveSettings = SETTINGS_DEFAULTS
+) {
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -17,18 +20,18 @@ export function localBusinessSchema() {
     url: SITE.url,
     logo: SITE.logo,
     image: absoluteUrl(SITE.ogImage),
-    description: SITE.description,
-    telephone: SITE.telephoneE164,
-    email: SITE.email,
+    description: settings.description,
+    telephone: settings.telephoneE164,
+    email: settings.email,
     priceRange: SITE.priceRange,
     parentOrganization: { "@type": "Organization", name: SITE.parent },
     address: {
       "@type": "PostalAddress",
-      streetAddress: SITE.address.streetAddress,
-      addressLocality: SITE.address.addressLocality,
-      addressRegion: SITE.address.addressRegion,
-      postalCode: SITE.address.postalCode,
-      addressCountry: SITE.address.addressCountry,
+      streetAddress: settings.address.streetAddress,
+      addressLocality: settings.address.addressLocality,
+      addressRegion: settings.address.addressRegion,
+      postalCode: settings.address.postalCode,
+      addressCountry: settings.address.addressCountry,
     },
     geo: {
       "@type": "GeoCoordinates",

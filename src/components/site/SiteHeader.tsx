@@ -26,7 +26,13 @@ const navLinks = [
   { to: "/contact", label: "Contact" },
 ] as const;
 
-export function SiteHeader() {
+export function SiteHeader({
+  telephone = "1300 561 030",
+  telephoneE164 = "1300561030",
+}: {
+  telephone?: string;
+  telephoneE164?: string;
+} = {}) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
@@ -68,12 +74,12 @@ export function SiteHeader() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <a
-            href="tel:1300561030"
+            href={`tel:${telephoneE164}`}
             className="flex items-center gap-2 rounded border border-white/20 px-3 py-2 text-sm transition hover:border-white/40"
           >
             <Phone className="h-4 w-4 text-orange" />
             <span className="font-display text-base font-semibold tracking-wide">
-              1300 561 030
+              {telephone}
             </span>
             <span className="ml-1 rounded-sm bg-orange px-1.5 py-0.5 text-[10px] font-bold uppercase">
               Call 24/7
@@ -114,10 +120,10 @@ export function SiteHeader() {
               </Link>
             ))}
             <a
-              href="tel:1300561030"
+              href={`tel:${telephoneE164}`}
               className="mt-2 flex items-center justify-center gap-2 rounded bg-orange px-3 py-3 text-sm font-semibold"
             >
-              <Phone className="h-4 w-4" /> Call 1300 561 030 — 24/7
+              <Phone className="h-4 w-4" /> Call {telephone} — 24/7
             </a>
           </div>
         </div>

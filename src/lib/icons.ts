@@ -1,0 +1,72 @@
+import {
+  Snowflake,
+  Thermometer,
+  Layers,
+  Boxes,
+  ChefHat,
+  HeartPulse,
+  GraduationCap,
+  HardHat,
+  Building2,
+  Utensils,
+  Truck,
+  Factory,
+  Stethoscope,
+  Beef,
+  ShoppingCart,
+  Hotel,
+  Warehouse,
+  Leaf,
+  AlertTriangle,
+  Wrench,
+  Zap,
+  Wallet,
+  RefreshCw,
+  ClipboardCheck,
+  ShieldCheck,
+  Lock,
+  Cpu,
+  Check,
+  MapPin,
+  type LucideIcon,
+} from "lucide-react";
+
+/** Named icons selectable in the admin and rendered on the public site. */
+export const ICONS: Record<string, LucideIcon> = {
+  Snowflake,
+  Thermometer,
+  Layers,
+  Boxes,
+  ChefHat,
+  HeartPulse,
+  GraduationCap,
+  HardHat,
+  Building2,
+  Utensils,
+  Truck,
+  Factory,
+  Stethoscope,
+  Beef,
+  ShoppingCart,
+  Hotel,
+  Warehouse,
+  Leaf,
+  AlertTriangle,
+  Wrench,
+  Zap,
+  Wallet,
+  RefreshCw,
+  ClipboardCheck,
+  ShieldCheck,
+  Lock,
+  Cpu,
+  Check,
+  MapPin,
+};
+
+export const ICON_NAMES = Object.keys(ICONS);
+
+/** Resolve an icon name to a component, falling back to Snowflake. */
+export function getIcon(name: string | null | undefined): LucideIcon {
+  return (name && ICONS[name]) || Snowflake;
+}

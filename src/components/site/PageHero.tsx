@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { BreadcrumbJsonLd } from "./Breadcrumbs";
+import { telHref } from "@/lib/settings";
+import { getSettings } from "@/lib/settings.server";
 
 export function PageHero({
   eyebrow,
@@ -46,17 +48,16 @@ export function PageHero({
   );
 }
 
-export function CtaStrip() {
+export async function CtaStrip() {
+  const settings = await getSettings();
   return (
     <section className="bg-navy py-14 text-white">
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 px-4 text-center md:flex-row md:text-left">
         <div>
           <h2 className="font-display text-2xl font-bold md:text-3xl">
-            Talk to Koolacube about your site.
+            {settings.ctaTitle}
           </h2>
-          <p className="mt-1 text-sm text-white/70">
-            Monthly hire from $440 + GST · Backed by ACRO Refrigeration.
-          </p>
+          <p className="mt-1 text-sm text-white/70">{settings.ctaSubtitle}</p>
         </div>
         <div className="flex flex-wrap justify-center gap-3">
           <Link
@@ -66,10 +67,10 @@ export function CtaStrip() {
             Get a Quote
           </Link>
           <a
-            href="tel:1300561030"
+            href={`tel:${telHref(settings.telephone)}`}
             className="rounded border border-white/25 px-5 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white/10"
           >
-            Call 1300 561 030
+            Call {settings.telephone}
           </a>
         </div>
       </div>
