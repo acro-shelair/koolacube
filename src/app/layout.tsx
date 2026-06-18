@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
+import NavigationProgress from "@/components/NavigationProgress";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -88,7 +89,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en-AU" className={`${inter.variable} ${barlow.variable}`}>
-      <body>{children}</body>
+      <body>
+        <NavigationProgress />
+        {children}
+      </body>
     </html>
   );
 }
