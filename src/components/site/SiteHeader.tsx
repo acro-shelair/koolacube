@@ -22,6 +22,7 @@ const navLinks = [
   { to: "/available-units", label: "Available Units" },
   { to: "/industries", label: "Industries" },
   // { to: "/service-areas", label: "Service Areas" },
+  { to: "/blog", label: "Blog" },
   { to: "/about", label: "About" },
   { to: "/contact", label: "Contact" },
 ] as const;

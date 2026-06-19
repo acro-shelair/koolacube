@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Modal, Toggle } from "@/components/ui/modal";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 import { StringList, IconPicker } from "@/components/admin/fields";
 import { Plus, Pencil, Trash2, Boxes, Eye, EyeOff, Sparkles } from "lucide-react";
 
@@ -329,12 +330,8 @@ function UnitDialog({
           <Textarea rows={3} value={intro} onChange={(e) => setIntro(e.target.value)} />
         </div>
         <div className="space-y-1.5">
-          <Label>Image path</Label>
-          <Input
-            value={img}
-            onChange={(e) => setImg(e.target.value)}
-            placeholder="/unit-coldroom.jpg"
-          />
+          <Label>Image</Label>
+          <ImageUploader value={img} onChange={setImg} heightClass="h-40" />
         </div>
 
         {/* Specs */}

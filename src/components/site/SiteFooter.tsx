@@ -53,6 +53,7 @@ export function SiteFooter({
             <FooterLink to="/buy/ex-hire">Ex-Hire Sales</FooterLink>
             <FooterLink to="/industries">Industries</FooterLink>
             <FooterLink to="/service-areas">Service Areas</FooterLink>
+            <FooterLink to="/blog">Blog</FooterLink>
             <FooterLink to="/about">About</FooterLink>
             <FooterLink to="/contact">Contact</FooterLink>
           </ul>

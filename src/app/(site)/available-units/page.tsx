@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PageHero, CtaStrip } from "@/components/site/PageHero";
+import { BlogStrip } from "@/components/site/BlogStrip";
 import { getPublishedUnits, type Unit } from "@/lib/units";
 import { getIcon } from "@/lib/icons";
 import { Check, ArrowRight } from "lucide-react";
@@ -55,6 +57,12 @@ export default async function Page() {
         <UnitSection key={unit.slug} unit={unit} alt={idx % 2 === 1} />
       ))}
 
+      <BlogStrip
+        linkingTo="/available-units"
+        heading="Related Reading"
+        tone="muted"
+      />
+
       <CtaStrip />
     </>
   );
@@ -87,14 +95,13 @@ function UnitSection({ unit, alt }: { unit: Unit; alt: boolean }) {
         {/* Image + spec table */}
         <div className="mt-10 grid gap-8 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <div className="overflow-hidden rounded-lg border border-border bg-navy shadow-sm">
-              <img
+            <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-border bg-navy shadow-sm">
+              <Image
                 src={unit.img}
                 alt={unit.name}
-                width={1024}
-                height={768}
-                loading="lazy"
-                className="aspect-[4/3] h-full w-full object-cover"
+                fill
+                sizes="(max-width: 1024px) 100vw, 40vw"
+                className="object-cover"
               />
             </div>
           </div>

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { Phone, Check, X, Snowflake, ArrowRight } from "lucide-react";
 import { FaqList } from "@/components/site/FaqList";
+import { BlogStrip } from "@/components/site/BlogStrip";
 import { getPublishedFaqs } from "@/lib/faqs";
 import { HOME_DEFAULT, type HomeStored } from "@/lib/content/home";
 import { getPageContent } from "@/lib/content/page-content.server";
@@ -39,11 +41,12 @@ export async function renderHomePage() {
     <>
       {/* HERO */}
       <section className="relative isolate overflow-hidden bg-navy-deep text-white">
-        <img
+        <Image
           src="/hero-coldroom.jpg"
           alt="Skid-mounted commercial cold room at a warehouse loading dock"
-          width={1920}
-          height={1080}
+          fill
+          priority
+          sizes="100vw"
           className="absolute inset-0 h-full w-full object-cover opacity-35"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-navy-deep via-navy-deep/85 to-transparent" />
@@ -106,14 +109,13 @@ export async function renderHomePage() {
                   key={p.type}
                   className="group flex flex-col overflow-hidden rounded-lg border border-border bg-white shadow-sm transition hover:shadow-xl"
                 >
-                  <div className="aspect-[4/3] overflow-hidden bg-navy">
-                    <img
+                  <div className="relative aspect-[4/3] overflow-hidden bg-navy">
+                    <Image
                       src={p.img}
                       alt={p.type}
-                      width={1024}
-                      height={768}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover transition duration-500 group-hover:scale-105"
                     />
                   </div>
                   <div className="flex flex-1 flex-col p-6">
@@ -279,26 +281,13 @@ export async function renderHomePage() {
             {d.availableUnits.map((u) => (
               <div key={u.type} className="overflow-hidden rounded-lg border border-border bg-white shadow-sm">
                 <div className="relative aspect-[4/3] overflow-hidden bg-navy">
-                  <img
+                  <Image
                     src={u.img}
                     alt={u.type}
-                    width={1024}
-                    height={768}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
                   />
-                  <span
-                    className={
-                      "absolute left-3 top-3 rounded px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider " +
-                      (u.status === "Available"
-                        ? "bg-emerald-500 text-white"
-                        : u.status === "On Hire"
-                          ? "bg-orange text-white"
-                          : "bg-white text-navy")
-                    }
-                  >
-                    {u.status}
-                  </span>
                 </div>
                 <div className="p-5">
                   <h3 className="font-display text-lg font-semibold">{u.type}</h3>
@@ -328,6 +317,12 @@ export async function renderHomePage() {
           </div>
         </div>
       </section>
+
+      {/* FROM THE BLOG */}
+      <BlogStrip
+        heading="Cold Room Tips & Guides"
+        intro="Practical advice on hiring, buying and running cold rooms and freezer rooms."
+      />
 
       {/* TRUST */}
       <section className="bg-navy-deep text-white">

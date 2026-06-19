@@ -17,7 +17,6 @@ export type HomeUnit = {
   dims: string;
   power: string;
   price: string;
-  status: string;
   img: string;
 };
 
@@ -166,9 +165,9 @@ export const HOME_DEFAULT: HomeStored = {
   availableHeading: "Units currently in our fleet",
   availableViewAll: "View all available units",
   availableUnits: [
-    { type: "Cold Room — 3m x 2.4m", dims: "Internal 2.8 × 2.2 × 2.1 m", power: "240V / 15A", price: "$440 / mo + GST", status: "Available", img: "/unit-coldroom.jpg" },
-    { type: "Freezer Room — 3m x 2.4m", dims: "Internal 2.8 × 2.2 × 2.1 m", power: "240V / 15A", price: "$750 / mo + GST", status: "On Hire", img: "/unit-freezer.jpg" },
-    { type: "Dual Temp — 4m x 2.4m", dims: "Cold + Freezer compartments", power: "415V 3-phase", price: "$850 / mo + GST", status: "Coming Soon", img: "/unit-dual.jpg" },
+    { type: "Cold Room — 3m x 2.4m", dims: "Internal 2.8 × 2.2 × 2.1 m", power: "240V / 15A", price: "$440 / mo + GST", img: "/unit-coldroom.jpg" },
+    { type: "Freezer Room — 3m x 2.4m", dims: "Internal 2.8 × 2.2 × 2.1 m", power: "240V / 15A", price: "$750 / mo + GST", img: "/unit-freezer.jpg" },
+    { type: "Dual Temp — 4m x 2.4m", dims: "Cold + Freezer compartments", power: "415V 3-phase", price: "$850 / mo + GST", img: "/unit-dual.jpg" },
   ],
 
   trustTag: "Backed By Refrigeration People",

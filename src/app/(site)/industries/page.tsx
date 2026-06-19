@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero, CtaStrip } from "@/components/site/PageHero";
+import { BlogStrip } from "@/components/site/BlogStrip";
 import { getPublishedIndustries, type Industry } from "@/lib/industries";
 import { getIcon } from "@/lib/icons";
 import { Check, AlertTriangle, ArrowRight } from "lucide-react";
@@ -63,6 +64,12 @@ export default async function Page() {
       {industries.map((industry, idx) => (
         <IndustrySection key={industry.slug} industry={industry} alt={idx % 2 === 1} />
       ))}
+
+      <BlogStrip
+        linkingTo="/industries"
+        heading="Guides for Your Industry"
+        tone="muted"
+      />
 
       <CtaStrip />
     </>

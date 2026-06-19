@@ -26,6 +26,16 @@ const legacyRedirects = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    // Serve modern formats; Next negotiates AVIF → WebP → original per browser.
+    formats: ["image/avif", "image/webp"],
+    // Cache optimized images for 30 days.
+    minimumCacheTTL: 60 * 60 * 24 * 30,
+    // Allow admin-uploaded images served from the Supabase Storage bucket.
+    remotePatterns: [
+      { protocol: "https", hostname: "cjebtnwjpbthtysdrese.supabase.co" },
+    ],
+  },
   async redirects() {
     return legacyRedirects.map((r) => ({ ...r, permanent: true }));
   },

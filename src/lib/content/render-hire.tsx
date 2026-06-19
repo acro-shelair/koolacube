@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { HireContent, type HireData } from "@/components/site/HireContent";
+import { BlogStrip } from "@/components/site/BlogStrip";
 import { HIRE_DEFAULTS, type HireStored } from "@/lib/content/hire";
 import { getPageContent } from "@/lib/content/page-content.server";
 import { getIcon } from "@/lib/icons";
@@ -51,5 +52,10 @@ export async function renderHirePage(path: string) {
     useCases: d.useCases,
     monthlyPriceFrom: d.monthlyPriceFrom,
   };
-  return <HireContent data={data} />;
+  return (
+    <>
+      <HireContent data={data} />
+      <BlogStrip linkingTo={path} heading="Cold Room Hire Guides" tone="muted" />
+    </>
+  );
 }

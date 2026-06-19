@@ -251,14 +251,11 @@ function UnitList({
               <Input value={it.power} onChange={(e) => set(i, { power: e.target.value })} placeholder="Power" />
               <Input value={it.price} onChange={(e) => set(i, { price: e.target.value })} placeholder="Hire price" />
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <Input value={it.status} onChange={(e) => set(i, { status: e.target.value })} placeholder="Status (Available / On Hire / Coming Soon)" />
-              <Input value={it.img} onChange={(e) => set(i, { img: e.target.value })} placeholder="Image path" />
-            </div>
+            <Input value={it.img} onChange={(e) => set(i, { img: e.target.value })} placeholder="Image path" />
           </div>
         ))}
       </div>
-      <Button type="button" size="sm" variant="outline" onClick={() => onChange([...items, { type: "", dims: "", power: "", price: "", status: "Available", img: "" }])}>
+      <Button type="button" size="sm" variant="outline" onClick={() => onChange([...items, { type: "", dims: "", power: "", price: "", img: "" }])}>
         <Plus className="h-3.5 w-3.5" /> Add unit
       </Button>
     </div>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BuyContent, type BuyData } from "@/components/site/BuyContent";
+import { BlogStrip } from "@/components/site/BlogStrip";
 import { BUY_DEFAULTS, type BuyStored } from "@/lib/content/buy";
 import { getPageContent } from "@/lib/content/page-content.server";
 import { getIcon } from "@/lib/icons";
@@ -51,5 +52,10 @@ export async function renderBuyPage(path: string) {
     productAvailability: d.productAvailability,
     productCondition: d.productCondition,
   };
-  return <BuyContent data={data} />;
+  return (
+    <>
+      <BuyContent data={data} />
+      <BlogStrip linkingTo={path} heading="Buying Guides & Tips" tone="muted" />
+    </>
+  );
 }

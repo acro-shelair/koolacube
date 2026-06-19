@@ -11,6 +11,7 @@ import {
   Boxes,
   Building2,
   HelpCircle,
+  Newspaper,
   Inbox,
   SlidersHorizontal,
   Users,
@@ -46,6 +47,7 @@ const navGroups: NavGroup[] = [
         permission: "industries",
       },
       { label: "FAQs", href: "/admin/faqs", icon: HelpCircle, permission: "faqs" },
+      { label: "Blog", href: "/admin/posts", icon: Newspaper, permission: "blog" },
     ],
   },
   {
