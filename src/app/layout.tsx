@@ -3,6 +3,7 @@ import { Inter, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import NavigationProgress from "@/components/NavigationProgress";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -92,6 +93,7 @@ export default function RootLayout({
       <body>
         <NavigationProgress />
         {children}
+        <Analytics />
       </body>
     </html>
   );
