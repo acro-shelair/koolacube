@@ -4,31 +4,26 @@ import Link from "next/link";
 import { PageHero, CtaStrip } from "@/components/site/PageHero";
 import { BlogStrip } from "@/components/site/BlogStrip";
 import { getPublishedUnits, type Unit } from "@/lib/units";
+import { getIntroPage, introPageMetadata } from "@/lib/content/render-intro";
 import { getIcon } from "@/lib/icons";
 import { Check, ArrowRight } from "lucide-react";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/available-units" },
-  title: "Available Units — Cooler, Freezer & Dual Temp Rooms | Koolacube",
-  description:
-    "Portable cooler rooms, freezer rooms and dual temp rooms in 3m, 6m and 9m sizes. Full specifications, temperature ranges and ideal applications. Custom builds available.",
-  openGraph: {
-    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
-    title: "Available Units | Koolacube",
-    description:
-      "Portable cooler rooms, freezer rooms and dual temp rooms — full specifications and ideal applications.",
-  },
-};
+export function generateMetadata(): Promise<Metadata> {
+  return introPageMetadata("/available-units");
+}
 
 export default async function Page() {
-  const units = await getPublishedUnits();
+  const [units, content] = await Promise.all([
+    getPublishedUnits(),
+    getIntroPage("/available-units"),
+  ]);
   return (
     <>
       <PageHero
-        eyebrow="Our Fleet"
-        crumb="Available Units"
-        title="Available Units"
-        intro="Portable cooler rooms, freezer rooms and dual temp rooms — available in 3m, 6m and 9m sizes with custom builds on request. Explore the specifications and ideal applications for each below."
+        eyebrow={content.eyebrow}
+        crumb={content.crumb}
+        title={content.title}
+        intro={content.intro}
       />
 
       {/* Quick jump */}

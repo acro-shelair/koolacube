@@ -3,31 +3,26 @@ import Link from "next/link";
 import { PageHero, CtaStrip } from "@/components/site/PageHero";
 import { BlogStrip } from "@/components/site/BlogStrip";
 import { getPublishedIndustries, type Industry } from "@/lib/industries";
+import { getIntroPage, introPageMetadata } from "@/lib/content/render-intro";
 import { getIcon } from "@/lib/icons";
 import { Check, AlertTriangle, ArrowRight } from "lucide-react";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/industries" },
-  title: "Industries We Serve | Koolacube",
-  description:
-    "Portable cooling solutions for hospitality, aged care, healthcare, education, construction and mining. Reliable temperature control, easy mobility and full compliance across Australia.",
-  openGraph: {
-    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
-    title: "Industries We Serve | Koolacube",
-    description:
-      "Tailored portable cold room and freezer solutions for hospitality, aged care, education, construction and mining.",
-  },
-};
+export function generateMetadata(): Promise<Metadata> {
+  return introPageMetadata("/industries");
+}
 
 export default async function Page() {
-  const industries = await getPublishedIndustries();
+  const [industries, content] = await Promise.all([
+    getPublishedIndustries(),
+    getIntroPage("/industries"),
+  ]);
   return (
     <>
       <PageHero
-        eyebrow="Industries"
-        crumb="Industries"
-        title="Industries We Serve"
-        intro="Koolacube provides reliable, portable cooling solutions designed for the unique needs of multiple sectors—including hospitality, aged care, healthcare, education, construction and mining. Our cold rooms deliver consistent temperature control, easy mobility and full compliance, making them the preferred choice across Australia."
+        eyebrow={content.eyebrow}
+        crumb={content.crumb}
+        title={content.title}
+        intro={content.intro}
       />
 
       {/* Quick jump */}

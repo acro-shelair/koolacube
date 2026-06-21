@@ -2,11 +2,13 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { pageByKey } from "@/lib/content/registry";
 import { getContentPage } from "@/lib/content/render-content";
+import { getIntroPage } from "@/lib/content/render-intro";
 import { getHirePage } from "@/lib/content/render-hire";
 import { getBuyPage } from "@/lib/content/render-buy";
 import { getAboutPage, getContactPage } from "@/lib/content/render-simple";
 import { getHomePage } from "@/lib/content/render-home";
 import ContentPageEditor from "./ContentPageEditor";
+import IntroPageEditor from "./IntroPageEditor";
 import HirePageEditor from "./HirePageEditor";
 import BuyPageEditor from "./BuyPageEditor";
 import AboutPageEditor from "./AboutPageEditor";
@@ -54,6 +56,8 @@ export default async function EditPage({
         <HomePageEditor path={entry.path} initial={await getHomePage()} />
       ) : entry.template === "content" ? (
         <ContentPageEditor path={entry.path} initial={await getContentPage(entry.path)} />
+      ) : entry.template === "intro" ? (
+        <IntroPageEditor path={entry.path} initial={await getIntroPage(entry.path)} />
       ) : entry.template === "hire" ? (
         <HirePageEditor path={entry.path} initial={await getHirePage(entry.path)} />
       ) : entry.template === "buy" ? (

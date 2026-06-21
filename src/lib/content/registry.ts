@@ -6,7 +6,7 @@
  * default)` (DB override merged over default) and the admin edits the same shape.
  */
 
-export type PageTemplate = "content" | "hire" | "buy" | "home" | "simple";
+export type PageTemplate = "content" | "hire" | "buy" | "home" | "simple" | "intro";
 
 export type PageEntry = {
   key: string; // slug-safe id used in /admin/pages/[key]
@@ -27,6 +27,20 @@ export type ContentPageData = {
   bullets: string[];
 };
 
+/**
+ * "Intro" template: hero (eyebrow/crumb/title/intro) + SEO meta only. Used by
+ * pages whose body is rendered from a database collection (Units, Industries) —
+ * the cards stay in their own admin managers; only the top copy is edited here.
+ */
+export type IntroPageData = {
+  metaTitle: string;
+  metaDescription: string;
+  eyebrow: string;
+  crumb: string;
+  title: string;
+  intro: string;
+};
+
 /** Convert a route to its registry key: "/" -> "home", "/hire/cold-room" -> "hire-cold-room". */
 export function pathToKey(path: string): string {
   return path.replace(/^\//, "").replace(/\//g, "-") || "home";
@@ -36,6 +50,9 @@ export const PAGES: PageEntry[] = [
   { key: "home", path: "/", label: "Home", group: "Main pages", template: "home" },
   { key: "about", path: "/about", label: "About", group: "Main pages", template: "simple" },
   { key: "contact", path: "/contact", label: "Contact", group: "Main pages", template: "simple" },
+
+  { key: "available-units", path: "/available-units", label: "Available Units", group: "Collections", template: "intro" },
+  { key: "industries", path: "/industries", label: "Industries", group: "Collections", template: "intro" },
 
   { key: "hire-cold-room", path: "/hire/cold-room", label: "Cold Room Hire", group: "Hire", template: "hire" },
   { key: "hire-freezer-room", path: "/hire/freezer-room", label: "Freezer Room Hire", group: "Hire", template: "hire" },
@@ -177,4 +194,28 @@ export const CONTENT_DEFAULTS: Record<string, ContentPageData> = {
     "Keep operating while you renovate. Hire a temporary cold room or freezer for the duration of your build.",
     ["Project-length hire", "Cold or freezer", "Skid mount on site", "Tested before delivery", "Monthly billing", "Reduces business interruption"]
   ),
+};
+
+/** Defaults for every `intro` template route (hero + SEO), keyed by path. */
+export const INTRO_DEFAULTS: Record<string, IntroPageData> = {
+  "/available-units": {
+    metaTitle: "Available Units — Cooler, Freezer & Dual Temp Rooms | Koolacube",
+    metaDescription:
+      "Portable cooler rooms, freezer rooms and dual temp rooms in 3m, 6m and 9m sizes. Full specifications, temperature ranges and ideal applications. Custom builds available.",
+    eyebrow: "Our Fleet",
+    crumb: "Available Units",
+    title: "Available Units",
+    intro:
+      "Portable cooler rooms, freezer rooms and dual temp rooms — available in 3m, 6m and 9m sizes with custom builds on request. Explore the specifications and ideal applications for each below.",
+  },
+  "/industries": {
+    metaTitle: "Industries We Serve | Koolacube",
+    metaDescription:
+      "Portable cooling solutions for hospitality, aged care, healthcare, education, construction and mining. Reliable temperature control, easy mobility and full compliance across Australia.",
+    eyebrow: "Industries",
+    crumb: "Industries",
+    title: "Industries We Serve",
+    intro:
+      "Koolacube provides reliable, portable cooling solutions designed for the unique needs of multiple sectors—including hospitality, aged care, healthcare, education, construction and mining. Our cold rooms deliver consistent temperature control, easy mobility and full compliance, making them the preferred choice across Australia.",
+  },
 };
