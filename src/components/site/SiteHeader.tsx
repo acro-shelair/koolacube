@@ -83,7 +83,7 @@ export function SiteHeader({
               {telephone}
             </span>
             <span className="ml-1 rounded-sm bg-orange px-1.5 py-0.5 text-[10px] font-bold uppercase">
-              Call 24/7
+              Hire & Sales
             </span>
           </a>
         </div>

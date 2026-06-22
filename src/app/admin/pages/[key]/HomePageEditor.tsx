@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { StringList, PairList, IconPicker } from "@/components/admin/fields";
+import { ImageUploader } from "@/components/admin/ImageUploader";
 import { Plus, Trash2, Check } from "lucide-react";
 
 export default function HomePageEditor({
@@ -213,7 +214,7 @@ function ProductList({
               <Input type="number" value={it.price} onChange={(e) => set(i, { price: Number(e.target.value) })} placeholder="Price /mo" />
               <Input value={it.daily} onChange={(e) => set(i, { daily: e.target.value })} placeholder="Daily equiv. (e.g. 14.47)" />
             </div>
-            <Input value={it.img} onChange={(e) => set(i, { img: e.target.value })} placeholder="Image path" />
+            <ImageUploader label="Image" value={it.img} onChange={(img) => set(i, { img })} heightClass="h-32" />
             <Textarea rows={2} value={it.blurb} onChange={(e) => set(i, { blurb: e.target.value })} placeholder="Blurb" />
           </div>
         ))}
@@ -241,17 +242,19 @@ function UnitList({
         {items.map((it, i) => (
           <div key={i} className="space-y-2 rounded-lg border border-border p-3">
             <div className="flex items-center gap-2">
-              <Input value={it.type} onChange={(e) => set(i, { type: e.target.value })} placeholder="Type" />
+              <Input value={it.type} onChange={(e) => set(i, { type: e.target.value })} placeholder="Type (e.g. Cold Room — 3m x 2.4m)" />
               <Button type="button" size="icon" variant="ghost" onClick={() => onChange(items.filter((_, idx) => idx !== i))}>
                 <Trash2 className="h-3.5 w-3.5 text-destructive" />
               </Button>
             </div>
-            <Input value={it.dims} onChange={(e) => set(i, { dims: e.target.value })} placeholder="Internal dimensions" />
+            <Field label="Room size / dimensions">
+              <Input value={it.dims} onChange={(e) => set(i, { dims: e.target.value })} placeholder="e.g. Internal 2.8 × 2.2 × 2.1 m" />
+            </Field>
             <div className="grid grid-cols-2 gap-2">
               <Input value={it.power} onChange={(e) => set(i, { power: e.target.value })} placeholder="Power" />
               <Input value={it.price} onChange={(e) => set(i, { price: e.target.value })} placeholder="Hire price" />
             </div>
-            <Input value={it.img} onChange={(e) => set(i, { img: e.target.value })} placeholder="Image path" />
+            <ImageUploader label="Image" value={it.img} onChange={(img) => set(i, { img })} heightClass="h-32" />
           </div>
         ))}
       </div>
