@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { updateSettings } from "./actions";
-import type { EffectiveSettings } from "@/lib/settings";
+import type { EffectiveSettings, FooterColumn } from "@/lib/settings";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Check } from "lucide-react";
+import { Check, Plus, Trash2 } from "lucide-react";
 
 export default function SettingsClient({
   initial,
@@ -28,6 +28,43 @@ export default function SettingsClient({
   function setAddr(key: keyof EffectiveSettings["address"], value: string) {
     setForm((prev) => ({ ...prev, address: { ...prev.address, [key]: value } }));
     setSaved(false);
+  }
+
+  // ── Footer columns / links ────────────────────────────────────────────────
+  function setColumns(columns: FooterColumn[]) {
+    set("footerColumns", columns);
+  }
+  function setColumnHeading(ci: number, heading: string) {
+    setColumns(form.footerColumns.map((c, i) => (i === ci ? { ...c, heading } : c)));
+  }
+  function addColumn() {
+    setColumns([...form.footerColumns, { heading: "New column", links: [] }]);
+  }
+  function removeColumn(ci: number) {
+    setColumns(form.footerColumns.filter((_, i) => i !== ci));
+  }
+  function setLink(ci: number, li: number, key: "label" | "href", value: string) {
+    setColumns(
+      form.footerColumns.map((c, i) =>
+        i === ci
+          ? { ...c, links: c.links.map((l, j) => (j === li ? { ...l, [key]: value } : l)) }
+          : c
+      )
+    );
+  }
+  function addLink(ci: number) {
+    setColumns(
+      form.footerColumns.map((c, i) =>
+        i === ci ? { ...c, links: [...c.links, { label: "", href: "" }] } : c
+      )
+    );
+  }
+  function removeLink(ci: number, li: number) {
+    setColumns(
+      form.footerColumns.map((c, i) =>
+        i === ci ? { ...c, links: c.links.filter((_, j) => j !== li) } : c
+      )
+    );
   }
 
   async function onSubmit(e: React.FormEvent) {
@@ -124,13 +161,6 @@ export default function SettingsClient({
               onChange={(e) => set("description", e.target.value)}
             />
           </FieldWrap>
-          <FieldWrap label="Footer blurb">
-            <Textarea
-              rows={2}
-              value={form.footerBlurb}
-              onChange={(e) => set("footerBlurb", e.target.value)}
-            />
-          </FieldWrap>
           <FieldWrap label="Call-to-action heading">
             <Input
               value={form.ctaTitle}
@@ -143,6 +173,96 @@ export default function SettingsClient({
               onChange={(e) => set("ctaSubtitle", e.target.value)}
             />
           </FieldWrap>
+        </div>
+      </Section>
+
+      <Section title="Footer">
+        <p className="-mt-2 mb-4 text-xs text-muted-foreground">
+          The footer’s logo and Contact column are built from the details above. Edit the blurb,
+          the “Backed by” badge, the bottom note and the link columns here.
+        </p>
+        <div className="space-y-4">
+          <FieldWrap label="Footer blurb">
+            <Textarea
+              rows={2}
+              value={form.footerBlurb}
+              onChange={(e) => set("footerBlurb", e.target.value)}
+            />
+          </FieldWrap>
+          <FieldWrap label="“Backed by” badge (leave blank to hide)">
+            <Input
+              value={form.footerBackedBy}
+              onChange={(e) => set("footerBackedBy", e.target.value)}
+              placeholder="Backed by HVACR Group / ACRO Refrigeration"
+            />
+          </FieldWrap>
+          <FieldWrap label="Bottom bar note (next to the copyright)">
+            <Input
+              value={form.footerBottomNote}
+              onChange={(e) => set("footerBottomNote", e.target.value)}
+              placeholder="Commercial cold room hire & sales · SE Queensland"
+            />
+          </FieldWrap>
+        </div>
+
+        <div className="mt-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <Label>Link columns</Label>
+            <Button type="button" size="sm" variant="outline" onClick={addColumn}>
+              <Plus className="h-3.5 w-3.5" /> Add column
+            </Button>
+          </div>
+
+          {form.footerColumns.map((column, ci) => (
+            <div key={ci} className="rounded-lg border border-border p-4">
+              <div className="flex items-center gap-2">
+                <Input
+                  value={column.heading}
+                  onChange={(e) => setColumnHeading(ci, e.target.value)}
+                  placeholder="Column heading (e.g. Hire)"
+                  className="font-semibold"
+                />
+                <Button
+                  type="button"
+                  size="icon"
+                  variant="ghost"
+                  onClick={() => removeColumn(ci)}
+                  title="Remove column"
+                >
+                  <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                </Button>
+              </div>
+
+              <div className="mt-3 space-y-2">
+                {column.links.map((link, li) => (
+                  <div key={li} className="flex items-center gap-2">
+                    <Input
+                      value={link.label}
+                      onChange={(e) => setLink(ci, li, "label", e.target.value)}
+                      placeholder="Link text"
+                    />
+                    <Input
+                      value={link.href}
+                      onChange={(e) => setLink(ci, li, "href", e.target.value)}
+                      placeholder="/path or https://…"
+                    />
+                    <Button
+                      type="button"
+                      size="icon"
+                      variant="ghost"
+                      onClick={() => removeLink(ci, li)}
+                      title="Remove link"
+                    >
+                      <Trash2 className="h-3.5 w-3.5 text-destructive" />
+                    </Button>
+                  </div>
+                ))}
+                <Button type="button" size="sm" variant="outline" onClick={() => addLink(ci)}>
+                  <Plus className="h-3.5 w-3.5" /> Add link
+                </Button>
+              </div>
+            </div>
+          ))}
         </div>
       </Section>
 

@@ -7,6 +7,7 @@ import { getHirePage } from "@/lib/content/render-hire";
 import { getBuyPage } from "@/lib/content/render-buy";
 import { getAboutPage, getContactPage } from "@/lib/content/render-simple";
 import { getHomePage } from "@/lib/content/render-home";
+import { getLegalPage } from "@/lib/content/render-legal";
 import ContentPageEditor from "./ContentPageEditor";
 import IntroPageEditor from "./IntroPageEditor";
 import HirePageEditor from "./HirePageEditor";
@@ -14,6 +15,7 @@ import BuyPageEditor from "./BuyPageEditor";
 import AboutPageEditor from "./AboutPageEditor";
 import ContactPageEditor from "./ContactPageEditor";
 import HomePageEditor from "./HomePageEditor";
+import LegalPageEditor from "./LegalPageEditor";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -62,6 +64,8 @@ export default async function EditPage({
         <HirePageEditor path={entry.path} initial={await getHirePage(entry.path)} />
       ) : entry.template === "buy" ? (
         <BuyPageEditor path={entry.path} initial={await getBuyPage(entry.path)} />
+      ) : entry.template === "legal" ? (
+        <LegalPageEditor path={entry.path} initial={await getLegalPage(entry.path)} />
       ) : entry.key === "about" ? (
         <AboutPageEditor path={entry.path} initial={await getAboutPage()} />
       ) : entry.key === "contact" ? (

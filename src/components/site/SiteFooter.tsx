@@ -25,39 +25,27 @@ export function SiteFooter({
             </span>
           </div>
           <p className="mt-4 text-sm leading-relaxed">{settings.footerBlurb}</p>
-          <div className="mt-5 inline-block rounded border border-white/15 px-3 py-2 text-xs">
-            Backed by <span className="font-semibold text-white">HVACR Group</span> /{" "}
-            <span className="font-semibold text-white">ACRO Refrigeration</span>
+          {settings.footerBackedBy && (
+            <div className="mt-5 inline-block rounded border border-white/15 px-3 py-2 text-xs text-white">
+              {settings.footerBackedBy}
+            </div>
+          )}
+        </div>
+
+        {settings.footerColumns.map((column) => (
+          <div key={column.heading}>
+            <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-white">
+              {column.heading}
+            </h4>
+            <ul className="mt-4 space-y-2 text-sm">
+              {column.links.map((link) => (
+                <FooterLink key={`${link.label}-${link.href}`} to={link.href}>
+                  {link.label}
+                </FooterLink>
+              ))}
+            </ul>
           </div>
-        </div>
-
-        <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-white">
-            Hire
-          </h4>
-          <ul className="mt-4 space-y-2 text-sm">
-            <FooterLink to="/hire/cold-room">Cold Room Hire</FooterLink>
-            <FooterLink to="/hire/freezer-room">Freezer Room Hire</FooterLink>
-            <FooterLink to="/hire/dual-temp">Dual Temp Room Hire</FooterLink>
-            <FooterLink to="/hire/long-term">Long-Term Hire</FooterLink>
-            <FooterLink to="/available-units">Available Units</FooterLink>
-          </ul>
-        </div>
-
-        <div>
-          <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-white">
-            Company
-          </h4>
-          <ul className="mt-4 space-y-2 text-sm">
-            <FooterLink to="/buy/new">Buy New</FooterLink>
-            <FooterLink to="/buy/ex-hire">Ex-Hire Sales</FooterLink>
-            <FooterLink to="/industries">Industries</FooterLink>
-            <FooterLink to="/service-areas">Service Areas</FooterLink>
-            <FooterLink to="/blog">Blog</FooterLink>
-            <FooterLink to="/about">About</FooterLink>
-            <FooterLink to="/contact">Contact</FooterLink>
-          </ul>
-        </div>
+        ))}
 
         <div>
           <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-white">
@@ -87,7 +75,10 @@ export function SiteFooter({
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-5 text-xs text-white/50 md:flex-row">
           <div>© {new Date().getFullYear()} Koolacube. All rights reserved.</div>
           <div className="flex items-center gap-4">
-            <span>Commercial cold room hire & sales · SE Queensland</span>
+            {settings.footerBottomNote && <span>{settings.footerBottomNote}</span>}
+            <Link href="/terms" className="transition hover:text-white">
+              Terms &amp; Conditions
+            </Link>
             <AdminLink />
           </div>
         </div>
