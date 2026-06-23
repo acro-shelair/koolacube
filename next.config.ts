@@ -26,6 +26,11 @@ const legacyRedirects = [
 ];
 
 const nextConfig: NextConfig = {
+  // Transform barrel imports (e.g. lucide-react) into per-icon imports so only
+  // the icons actually used ship to the browser — cuts unused JavaScript.
+  experimental: {
+    optimizePackageImports: ["lucide-react"],
+  },
   images: {
     // Serve modern formats; Next negotiates AVIF → WebP → original per browser.
     formats: ["image/avif", "image/webp"],

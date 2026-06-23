@@ -46,6 +46,7 @@ export async function renderHomePage() {
           alt="Skid-mounted commercial cold room at a warehouse loading dock"
           fill
           priority
+          quality={55}
           sizes="100vw"
           className="absolute inset-0 h-full w-full object-cover opacity-35"
         />
