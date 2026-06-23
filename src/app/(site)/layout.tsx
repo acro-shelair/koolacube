@@ -1,6 +1,7 @@
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { JsonLd } from "@/components/JsonLd";
+import { GoogleAds } from "@/components/GoogleAds";
 import { localBusinessSchema, websiteSchema } from "@/lib/jsonld";
 import { getSettings } from "@/lib/settings.server";
 
@@ -12,6 +13,7 @@ export default async function SiteLayout({
   const settings = await getSettings();
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <GoogleAds />
       <JsonLd data={[localBusinessSchema(settings), websiteSchema()]} />
       <SiteHeader
         telephone={settings.telephone}
