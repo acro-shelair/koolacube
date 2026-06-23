@@ -41,12 +41,19 @@ export async function renderHomePage() {
     <>
       {/* HERO */}
       <section className="relative isolate overflow-hidden bg-navy-deep text-white">
+        {/*
+          Decorative hero backdrop (rendered at 35% opacity behind the gradient
+          and text). Served as a pre-compressed static WebP with `unoptimized`
+          so the LCP request skips the on-demand image optimizer entirely — the
+          preload points straight at the static file, which is the fastest path
+          to paint on slow connections.
+        */}
         <Image
-          src="/hero-coldroom.jpg"
+          src="/hero-coldroom.webp"
           alt="Skid-mounted commercial cold room at a warehouse loading dock"
           fill
           priority
-          quality={55}
+          unoptimized
           sizes="100vw"
           className="absolute inset-0 h-full w-full object-cover opacity-35"
         />
