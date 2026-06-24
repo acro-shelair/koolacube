@@ -28,7 +28,12 @@ export async function renderLegalPage(path: string) {
   const data = await getLegalPage(path);
   return (
     <>
-      <PageHero eyebrow={data.eyebrow} crumb={data.crumb} title={data.title} intro={data.intro} />
+      <PageHero
+        eyebrow={data.eyebrow}
+        crumb={data.crumb}
+        title={data.title}
+        intro={data.intro}
+      />
 
       <section className="bg-white py-16 md:py-20">
         <div className="mx-auto max-w-3xl px-4">
@@ -36,7 +41,8 @@ export async function renderLegalPage(path: string) {
             <div className="mb-10 flex flex-wrap gap-x-6 gap-y-1 border-b border-border pb-6 text-sm text-muted-foreground">
               {data.effectiveDate && (
                 <span>
-                  <strong className="text-foreground">Effective Date:</strong> {data.effectiveDate}
+                  <strong className="text-foreground">Effective Date:</strong>{" "}
+                  {data.effectiveDate}
                 </span>
               )}
               {data.abn && (
